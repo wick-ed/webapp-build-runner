@@ -2,7 +2,7 @@ FROM debian:jessie
 
 RUN apt-get -y update
 
-RUN apt-get -y install g++ make curl git ant php5 php5-curl inotify-tools --fix-missing
+RUN apt-get -y install g++ make curl git ant php5 php5-curl --fix-missing
 
 RUN curl -sL https://deb.nodesource.com/setup_5.x | bash -
 RUN apt-get install -y nodejs
@@ -24,6 +24,10 @@ RUN echo 'phar.readonly = Off' >> /etc/php5/cli/php.ini
 RUN npm install -g bower
 
 RUN npm install -g gulp
+
+# copy our wait-on-file script as a substitute for the broken inotify-tool's intofywait
+COPY wait-on-file.sh /usr/bin/wait-on-file
+RUN chmod 755 /usr/bin/wait-on-file
 
 #Clean up
 RUN apt-get clean \
