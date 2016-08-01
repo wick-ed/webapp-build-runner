@@ -2,7 +2,7 @@ FROM debian:jessie
 
 RUN apt-get -y update
 
-RUN apt-get -y install g++ make curl git ant php5 php5-curl docker --fix-missing
+RUN apt-get -y install g++ make curl git ant php5 php5-curl --fix-missing
 
 RUN curl -sL https://deb.nodesource.com/setup_5.x | bash -
 RUN apt-get install -y nodejs
